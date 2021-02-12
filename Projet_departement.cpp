@@ -1,10 +1,14 @@
 #include "train.h"
 
 /* NOTES de Margot (pour comprendre le script, à modifier si vous voyez des erreurs!)
+
 (Horaires_d)i,j = départ du train numéro i au quai numéro j
 (où seuls les horaires de quais de stations sont pris en compte, et où les stations sont donc comptées chacune deux fois et dans l'ordre de passage:
 La Défense - Esplanade - ... - Berault - Chateau de Vincennes - Chateau de Vincennes - Berault - ... - Esplanade - La Défense)
 
+(Horaires_a)i,j = idem pour les arrivées
+
+Tot_bocs = nombre de segments total
 */
 
 // renvoie l'indice d'un tableau 1D correspondant à la valeur (i,j) d'un tableau 2D de taille nb_lignes x nb_colonnes
@@ -61,7 +65,7 @@ int importation(ligne & L){
         L.Vitesse_moy = Vitesse_moy ;
 
 
-        // lit Tot_blocs (nombre de quais en comptant leur multiplicité ?)
+        // lit Tot_blocs 
         monFlux >> mot;
         monFlux >> nombre_entier;
         const int Tot_blocs = int(nombre_entier);
