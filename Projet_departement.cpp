@@ -1,5 +1,12 @@
 #include "train.h"
 
+/* NOTES de Margot (pour comprendre le script, à modifier si vous voyez des erreurs!)
+(Horaires_d)i,j = départ du train numéro i au quai numéro j
+(où seuls les horaires de quais de stations sont pris en compte, et où les stations sont donc comptées chacune deux fois et dans l'ordre de passage:
+La Défense - Esplanade - ... - Berault - Chateau de Vincennes - Chateau de Vincennes - Berault - ... - Esplanade - La Défense)
+
+*/
+
 // renvoie l'indice d'un tableau 1D correspondant à la valeur (i,j) d'un tableau 2D de taille nb_lignes x nb_colonnes
 int indice_tableau(const int i, const int j, const int nb_lignes,const int nb_colonnes){
     int indice = i*nb_colonnes + j;
@@ -12,7 +19,7 @@ void affecte_horaires(const ligne L, train & t){
     int nb_stations = L.Nb_stations;
     for(int station =0; station <nb_stations ; station ++){
         int indice = indice_tableau(indice_train, station, indice_train, nb_stations);
-        t.tps_de_depart[station] = L.Horaires_d[indice];
+        t.tps_de_depart[station] = L.Horaires_d[indice]; 
         t.tps_de_d_arrivee[station] = L.Horaires_a[indice];
         t.taille_troncon[station] = L.Len_blocs[station];
     }
@@ -54,7 +61,7 @@ int importation(ligne & L){
         L.Vitesse_moy = Vitesse_moy ;
 
 
-        // lit Tot_blocs
+        // lit Tot_blocs (nombre de quais en comptant leur multiplicité ?)
         monFlux >> mot;
         monFlux >> nombre_entier;
         const int Tot_blocs = int(nombre_entier);
@@ -69,7 +76,7 @@ int importation(ligne & L){
                 monFlux >> nombre_entier; //Lit un nombre entier depuis le fichier
 
                 int indice = indice_tableau(train, noeud, Nb_trains, Tot_blocs);
-                Horaires_d[indice]= int(nombre_entier);
+                Horaires_d[indice]= int(nombre_entier); //Rajoute dans le tableau Horaire_d l'horaire du passage du train n°train au noeud n°noeud
                 L.Horaires_d[indice]= int(nombre_entier);
                 if (noeud == 0){
                     L.Horaires_depart[train] = int(nombre_entier);
