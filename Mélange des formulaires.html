@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+    <title>Urbanisation et Transports Urbains</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif&display=swap" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Fenix" rel="stylesheet" type="text/css">
+	
+	<SCRIPT LANGUAGE="javascript">
+function afficher(formulaire_modele) {
+var test = document.formulaire_modele.modele.value;
+document.formulaire_modele.output.value=test
+}
+function affichage_modele1(action){
+	
+	document.getElementById('block_modele1').style.display=(action=="oui")? "inline":"none";
+}
+
+function affichage_modele2(action){
+	
+document.getElementById('block_modele2').style.display=(action=="oui")? "inline":"none";
+}
+
+function teste() {
+  var m=0;
+  for (i=0;i<2;i++) {
+    if (document.formulaire_modele.modele[i].checked==true) {
+      m=i;
+      break;
+    }
+  }
+  return m;
+}
+</SCRIPT>
+</head>
+<body>
+    <style>
+        body{
+            font-family: "Fenix", serif;
+            background-color: rgb(228, 213, 148);
+        }
+        .absolute_div{
+            text-align: center ;
+            background-color: rgb(250, 249, 244);
+            height:40px;
+            }
+    </style>
+    <div class="absolute_div"><font size =+3>Simulation du traffic sur la ligne 1 du metro</font></div>
+    <BR><BR>
+    <font size =+3><i>Simulation</i></font>
+    <BR>
+    <form NAME="formulaire_modele" >
+
+	Choix du modèle :
+	<INPUT type="radio" name="modele" value="1" 
+onchange="affichage_modele1('oui') ; affichage_modele2('non')"> 
+Modèle 1
+	<INPUT type="radio" name="modele" value="2" 
+onchange="affichage_modele2('oui'); affichage_modele1('non')"> 
+Modèle 2 <BR>
+
+	Nombre de train :
+	<INPUT type="number" name="nb_train" value="" min='0' max='12'> 
+<BR>
+	Temps d'arret :
+	<INPUT type="text" name="tps_arret" value=""> <BR>
+	Temps de simulation :
+	<INPUT type "text" name="tps_simulation" value=""><br>
+	
+
+<div id="block_modele1" hidden>
+<form NAME="formulaire_vitesse1">	
+	Vitesse moyenne :
+	<INPUT TYPE="text" NAME="vitesse_moyenne" VALUE=""> 
+<BR>
+	</form>
+</div>
+
+<div id="block_modele2" hidden>
+<form NAME="formulaire_vitesse2">	
+	Vitesse maximale :
+	<INPUT TYPE="text" NAME="vitesse_maximale" VALUE=""> 
+<BR>
+	</form>
+	
+
+</form>
+</div>
+
+<button>Soumettre</button>
+
+</body>
+
+
+</html>
