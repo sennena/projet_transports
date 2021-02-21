@@ -1,0 +1,49 @@
+<HTML>
+<HEAD>
+<SCRIPT LANGUAGE="javascript">
+function afficher(formulaire_modele) {
+var test = document.formulaire_modele.modele.value;
+document.formulaire_modele.output.value=test
+}
+function affichage_modele1(action){
+	document.getElementById('block_modele1').style.display=(action=="oui")? "inline":"none";
+}
+function affichage_modele2(action){
+	document.getElementById('block_modele2').style.display=(action=="oui")? "inline":"none";
+}
+</SCRIPT>
+<script type="text/javascript" src="Modele_telecharg.js"></script>
+</HEAD>
+<BODY>
+<form NAME="formulaire_modele" >
+	Choix du modèle :
+	<INPUT type="radio" name="modele" value="1" onchange="affichage_modele1('oui') ; affichage_modele2('non')" > Modèle 1
+	<INPUT type="radio" name="modele" value="2" onchange="affichage_modele2('oui'); affichage_modele1('non')" > Modèle 2
+<BR>
+	Nombre de train :
+	<INPUT type="text" name="nb_train" value=""  id="nb_train"> <BR>
+	Temps d'arret :
+	<INPUT type="text" name="tps_arret" value="" id="tps_arret"> <BR>
+	Temps de simulation :
+	<INPUT type="text" name="tps_simulation" value=""  id="tps_simulation"><br>
+	
+
+<div id="block_modele1" hidden>
+<form NAME="formulaire_vitesse1">	
+	Vitesse moyenne :
+	<INPUT TYPE="text" NAME="vitesse" VALUE="" id="vitesse_moy"> 
+<BR>
+	</form>
+</div>
+
+<div id="block_modele2" hidden>
+<form NAME="formulaire_vitesse2">	
+	Vitesse maximale :
+	<INPUT TYPE="text" NAME="vitesse" VALUE="" id="vitesse_max"> 
+<BR>
+	</form>
+</form>
+</div>
+<p><button onclick="simulation()">Cliquez ici pour telecharger</button> </p>
+</BODY>
+</HTML>
