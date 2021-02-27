@@ -1,0 +1,35 @@
+<!DOCTYPE html> 
+<html> 
+  
+<head> 
+    <title> 
+        How to rotate a text canvas using Fabric.js? 
+    </title> 
+  
+    <!-- Loading the FabricJS library -->
+    <script src= 
+"https://cdnjs.cloudflare.com/ajax/libs/fabric.js/3.6.2/fabric.min.js"> 
+     </script> 
+</head> 
+  
+<body> 
+    <canvas id="canvas" width="600" height="200"
+            style="border:1px solid #000000;"> 
+    </canvas> 
+  
+    <script> 
+  
+        // Create a new instace of Canvas 
+        var canvas = new fabric.Canvas("canvas"); 
+  
+        // Create a new Textbox instance 
+        var text = new fabric.Text('GeeksforGeeks', { 
+            angle: 10 
+        }); 
+  
+        // Render the Textbox on Canvas 
+        canvas.add(text); 
+    </script> 
+</body> 
+  
+</html>
