@@ -29,6 +29,30 @@ header img {
     /* background-color: white; */
 }
 
+.schema {
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 95%;
+    height: 800px;
+    display: flex;
+    border: 2px rgb(255,190,0) solid;
+    text-align: right;
+    overflow: hidden;
+    
+
+    /* background-color: white; */
+}
+
+.s1{
+    margin-top: 80px;
+    padding: 0em;
+    margin-left: 0.8cm;
+}
+
+.gh{
+    text-align: center;
+}
+
+
 .baspage {
     display: flex;
     flex-direction: row;
