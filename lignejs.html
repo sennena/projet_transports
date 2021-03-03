@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="myCanvas" width="1500" height="120" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML canvas tag.</canvas>
+
+<script>
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+
+// Dessin de la ligne
+for (i=0; i<148; i++) {
+ctx.fillStyle = " #FFC300 ";
+ctx.fillRect(10*i,65,10,10);
+ctx.fillRect(10*i,40,10,10);
+}
+
+// Dessin des stations
+for (i=0; i<25; i++) {
+ctx.beginPath();
+ctx.arc(50*i,45,10,0,2*Math.PI);
+ctx.fillStyle = ' #FFC300 ';
+ctx.fill();
+
+ctx.beginPath();
+ctx.arc(50*i,70,10,0,2*Math.PI);
+ctx.fillStyle = ' #FFC300 ';
+ctx.fill();
+}
+
+// Dessin station avec correspondance
+ctx.beginPath();
+ctx.arc(50,45,10,0,2*Math.PI);
+ctx.fillStyle = '#000000';
+ctx.fill();
+ctx.beginPath();
+ctx.arc(50,45,8,0,2*Math.PI);
+ctx.fillStyle = '#FFFFFF';
+ctx.fill();
+
+ctx.beginPath();
+ctx.arc(50,70,10,0,2*Math.PI);
+ctx.fillStyle = '#000000';
+ctx.fill();
+ctx.beginPath();
+ctx.arc(50,70,8,0,2*Math.PI);
+ctx.fillStyle = '#FFFFFF';
+ctx.fill();
+
+// Affichage nom de la station
+ctx.fillStyle = '#000000';
+ctx.font = "10px Arial";
+ctx.fillText("La Défense", 25, 10);
+
+
+</script>
+
+</body>
+</html>
+

@@ -24,6 +24,47 @@ function download(filename, text) {
 
 //======================= CREATION DU FICHIER SORTIE =======================
 
+function traitement_horaire(matrice_horaire){
+	var result="";
+	result+="====================== RESULTATS DE LA SIMULATION HORAIRES ====================== \n \n";
+	result+="	- Matrice horaire: \n";
+	
+	var Nb_ligne=matrice_horaire.get_li();
+	var Nb_colonne=matrice_horaire.get_co();
+	for (var i=0; i<Nb_ligne;i++){
+		result+="			";
+		for (var j=0; j<Nb_colonne; j++){
+			if(matrice_horaire.get(i,j)==-10000){
+				result+="	-	;";
+			}
+			else{
+				var intermed_heure=Math.floor((matrice_horaire.get(i,j))/3600);
+				var intermed_min=Math.floor((matrice_horaire.get(i,j)%3600)/60);
+				var intermed_sec=(matrice_horaire.get(i,j)%3600)%60;
+				result+=intermed_heure+"h "+intermed_min+"min "+intermed_sec+"sec ;";
+			}	
+		}
+		result+="	/// \n";
+	} 
+	
+	result+="\n \n \n \n";
+	result+="			Ecole des Ponts Paristech				2020/2021		GcA \n";
+	return result;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function traitement (Nb_max_rames,Tps_simul,Distance_securite, w,Distances_interstations, Vitesse_max, Vitesse_moy, Num_modele,Nb_quais,Nb_blocs,Tot_blocs,Tps_boucle,matrice_horaire){
 	var result="";
 	result+="====================== RESULTATS DE LA SIMULATION ====================== \n \n";

@@ -7,21 +7,42 @@
 
 // Arguments:
 function simulation(){
-var nb_train=document.getElementById("nb_train").value;
-var tps_arret=document.getElementById("tps_arret").value;
-var tps_simulation=document.getElementById("tps_simulation").value;
-var vitesse_moy=document.getElementById("vitesse_moy").value;
-var vitesse_max=document.getElementById("vitesse_max").value;
-var num_modele=document.getElementById("mod").value;
+	
+var nb_tr=document.getElementById("nb_train").value;
+var tps_arr=document.getElementById("arret").value;
+var tps_simula=document.getElementById("tps_simulation").value;
+var dist_secur=document.getElementById("distance_securite").value;
+var Vmoy=document.getElementById("vitesse_moy").value;
+var Vmax=document.getElementById("vitesse_max").value;
+var valeur_modele=document.getElementById("mod").value;
 
-var Nb_max_rames=nb_train;
-var Tps_simul=tps_simulation;
+/*
+var Nb_max_rames=nb_tr;
+var Tps_simul=tps_simula;
 var Distance_securite=200;
-var w=tps_arret;
+var w=tps_arr;
 var Distances_interstations=[1054,700,940,830,680,410,460,640,430,700,590,450,420,540,350,655,730,860,990,670,890,800,790,840];
-var Vitesse_max=vitesse_max;
-var Vitesse_moy=vitesse_moy;
+var Vitesse_max=Vmax;
+var Vitesse_moy=Vmoy;
 var Num_modele=1;
+*/
+var Nb_max_rames=parseInt(nb_tr);
+var Tps_simul=parseInt(tps_simula);
+var Distance_securite=parseInt(dist_secur);
+var w=parseInt(tps_arr);
+var Distances_interstations=[1054,700,940,830,680,410,460,640,430,700,590,450,420,540,350,655,730,860,990,670,890,800,790,840];
+var Vitesse_max=parseInt(Vmax);
+var Vitesse_moy=parseInt(Vmoy);
+var Num_modele=parseInt(valeur_modele);
+
+
+ 
+
+
+
+
+
+
 
 
 // OUTIL DE GESTION DES TABLEAUX MULTI-DIMENSIONNELS
@@ -71,6 +92,16 @@ class Matrice {
 	get_co(){
 		return this.nb_colonne;
 	}
+	decal_co(k){
+		var colo = new Array (this.nb_ligne)
+		 for(var i=0; i<this.nb_ligne; i++){
+		 	colo[i]=this.tab[(i*this.nb_colonne)+k];
+		 }
+		 for(var i=0; i<this.nb_ligne; i++){
+		 	var ni=(((i+1)%this.nb_ligne)+this.nb_ligne)%this.nb_ligne;
+		 	this.tab[(i*this.nb_colonne)+k]=colo[ni];
+		 }
+	}
 }
 
 
@@ -83,11 +114,16 @@ function zero (T,taille,valeur){
 
 
 
+
+
+
+
+
+
+
+
+
 // PROGRAMME PRINCIPAL
-
-var Distances_interstations=[1054,700,940,830,680,410,460,640,430,700,590,450,420,540,350,655,730,860,990,670,890,800,790,840];
-var Distance_securite=200;
-
 
 function modele(Nb_max_rames, Tps_sim, Distance_securite, w, Distances_interstations, Vitesse_max, Vitesse_moy, Num_modele){
 	var n=Distances_interstations.length;
@@ -324,15 +360,53 @@ function modele(Nb_max_rames, Tps_sim, Distance_securite, w, Distances_interstat
 		}
 	}
 
+	var matrice_horaire_train=new Matrice(T,Tot_blocs);
+	for(var i=0; i<T;i++){
+		for (var j=0; j<Tot_blocs;j++){
+			matrice_horaire_train.set(i,j,dt.get(i,j));
+		}
+	}
+
+	var indice_premier=0;
+	for(var l=bip.length-1;l>=0;l--){
+		if(bip[l]==1){
+			indice_premier=l;
+		}
+	}
+	console.log(indice_premier);
+	for(var h=indice_premier+1; h<matrice_horaire_train.get_co();h++){
+			matrice_horaire_train.decal_co(h);
+		}
+	for (var k=indice_premier+1; k<matrice_horaire_train.get_co(); k++){
+		if(bip[k]==1){
+			for(var h=k+1; h<matrice_horaire_train.get_co();h++){
+				matrice_horaire_train.decal_co(h);
+			}
+		}
+		
+	}
+
 	var RESULTAT= new Array();
 	RESULTAT.push(Nb_quais);
 	RESULTAT.push(Nb_blocs);
 	RESULTAT.push(Tot_blocs);
 	RESULTAT.push(Tps_boucle);
 	RESULTAT.push(matrice_horaire);
+	RESULTAT.push(Quais);
+	RESULTAT.push(matrice_horaire_train);
 
 	return RESULTAT;
 }
+
+
+
+
+
+
+
+
+
+
 
 //======================= FONCTION DE TELECHARGEMENT =======================
 
@@ -354,33 +428,72 @@ function download(filename, text) {
 //======================= CREATION DU FICHIER SORTIE =======================
 
 
-function traitement_horaire(matrice_horaire){
+function traitement_horaire(matrice_horaire,sta){
 	var result="";
-	result+="====================== RESULTATS DE LA SIMULATION HORAIRES ====================== \n \n";
-	result+="	- Matrice horaire: \n";
+	result+="											====================== RESULTATS DE LA SIMULATION HORAIRES ====================== \n \n";
+	result+="\n";
 	
 	var Nb_ligne=matrice_horaire.get_li();
 	var Nb_colonne=matrice_horaire.get_co();
+	result+="			";
+	for(var k=0; k<sta.length;k++){
+		var inter=sta[k];
+		while (inter.length!=16){
+			inter+=" ";
+		}
+		inter+="|  ";
+		result+=inter;
+	}
+	for(var k=1; k<sta.length+1;k++){
+		var inter=sta[sta.length-k];
+		while (inter.length!=16){
+			inter+=" ";
+		}
+		inter+="|  ";
+		result+=inter;
+	}
+	result+="	/// \n";
+	result+="			";
+	for(var k=0; k<Nb_colonne;k++){
+		var inter="_";
+		while (inter.length!=16){
+			inter+="_";
+		}
+		inter+="|__";
+		result+=inter;
+	}
+	result+="	/// \n";
 	for (var i=0; i<Nb_ligne;i++){
 		result+="			";
 		for (var j=0; j<Nb_colonne; j++){
-			if(matrice_horaire.get(i,j)==-10000){
-				result+="	-	;";
+			if(matrice_horaire.get(i,j)==-100000){
+				var inter="-No train-";
+				while (inter.length!=16){
+					inter+=" ";
+				}
+				inter+="|  ";
+				result+=inter;
 			}
 			else{
 				var intermed_heure=Math.floor((matrice_horaire.get(i,j))/3600);
 				var intermed_min=Math.floor((matrice_horaire.get(i,j)%3600)/60);
 				var intermed_sec=(matrice_horaire.get(i,j)%3600)%60;
-				result+=intermed_heure+"h "+intermed_min+"min "+intermed_sec+"sec ;";
+				var inter=intermed_heure+"h "+intermed_min+"min "+intermed_sec+"sec";
+				while (inter.length!=16){
+					inter+=" ";
+				}
+				inter+="|  ";
+				result+=inter;
 			}	
 		}
 		result+="	/// \n";
 	} 
 	
 	result+="\n \n \n \n";
-	result+="			Ecole des Ponts Paristech				2020/2021		GcA \n";
+	result+="														Ecole des Ponts Paristech				2020/2021		GcA \n";
 	return result;
 }
+
 
 function traitement (Nb_max_rames,Tps_simul,Distance_securite, w,Distances_interstations, Vitesse_max, Vitesse_moy, Num_modele,Nb_quais,Nb_blocs,Tot_blocs,Tps_boucle,matrice_horaire){
 	var result="";
@@ -431,7 +544,38 @@ function traitement (Nb_max_rames,Tps_simul,Distance_securite, w,Distances_inter
 	return result;
 }
 
+function matrice_simple(matriceH,quais, nb_quais){
+	var matriceS= new Matrice (matriceH.get_li(),nb_quais);
+	for (var i=0; i<matriceH.get_li(); i++){
+		var inter_li = new Array();
+		for(var j=0; j<matriceH.get_co(); j++){
+			if(quais[j]!=-1){
+				inter_li.push(matriceH.get(i,j));
+			}
+		}
+		for (var k=0; k<inter_li.length; k++){
+			matriceS.set(i,k,inter_li[k]);
+		}
+	}
+	return matriceS;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //======================= RECUPERATION DES DONNEES =======================
+var  
+stations=["La défense","Esplanade","Pont de Neuilly","Les Sablons","Porte Maillot","Argentine","Etoile","George V","Franklin D.R","Champs Elysées","Concorde","Tuileries","Palais Royal","Louvre rivoli","Châtelet","Hôtel de Ville","Saint Paul","Bastille","Gare de Lyon","Reuilly Diderot","Nation","Porte de V","Saint Mandé","Berault","Chateau de V"];	
 
 var Result=modele(Nb_max_rames,Tps_simul,Distance_securite,w,Distances_interstations,Vitesse_max,Vitesse_moy,Num_modele);
 
@@ -445,7 +589,15 @@ var tps_boucle=Result[3];
 console.log(tps_boucle);
 var matrice_h=Result[4];
 console.log(matrice_h);
+var train_h=Result[6]
+var Q=Result[5];
+var result2;
+result2=matrice_simple(matrice_h,Q,nb_quais);
+var result3;
+result3=matrice_simple(train_h,Q,nb_quais);
 
 download('Resultats',traitement(Nb_max_rames,Tps_simul,Distance_securite,w,Distances_interstations,Vitesse_max,Vitesse_moy,Num_modele,nb_quais,nb_blocks,tot_block,tps_boucle,matrice_h));
-download('horaires',traitement_horaire(matrice_h));
+download('horaires_simples',traitement_horaire(result2,stations));
+download('train_simples',traitement_horaire(result3,stations));
 }
+

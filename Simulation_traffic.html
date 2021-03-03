@@ -1,49 +1,64 @@
 <HTML>
 <HEAD>
-<SCRIPT LANGUAGE="javascript">
-function afficher(formulaire_modele) {
-var test = document.formulaire_modele.modele.value;
-document.formulaire_modele.output.value=test
-}
-function affichage_modele1(action){
-	document.getElementById('block_modele1').style.display=(action=="oui")? "inline":"none";
-}
-function affichage_modele2(action){
-	document.getElementById('block_modele2').style.display=(action=="oui")? "inline":"none";
-}
-</SCRIPT>
+<script src="jsGraphDisplay.1.0.js"></script>
 <script type="text/javascript" src="Modele_telecharg.js"></script>
+<style type="text/css">
+	form {
+  	margin: 0 auto;
+  	width: 400px;
+  	padding: 1em;
+  	border: 1px solid red;
+  	border-radius: 1em;
+}
+	form {
+	margin: 0 auto;
+  	width: 400px;
+  	padding: 1em;
+  	border: 1px solid red;
+  	border-radius: 1em;
+  	text-align: center;
+}
+	.but{
+	margin: 0 auto;
+  	width: 400px;
+  	padding: 1em;
+  	border: 1px solid red;
+  	border-radius: 1em;
+  	text-align: center;
+	}
+    input {
+    	width: 30px;
+    }
+</style>
 </HEAD>
 <BODY>
+<br>
+<br>
+<br>
+<br>
+<p align="center"><img src="logo_ratp.png" id="logo"></p>
 <form NAME="formulaire_modele" >
 	Choix du modèle :
-	<INPUT type="radio" name="modele" value="1" onchange="affichage_modele1('oui') ; affichage_modele2('non')" > Modèle 1
-	<INPUT type="radio" name="modele" value="2" onchange="affichage_modele2('oui'); affichage_modele1('non')" > Modèle 2
-<BR>
+	<INPUT type="text" name="modele" value="1"  id="mod"> <BR>
 	Nombre de train :
-	<INPUT type="text" name="nb_train" value=""  id="nb_train"> <BR>
+	<INPUT type="text" name="nb_train" value="20"  id="nb_train"> <BR>
+	Distance de sécurité entre les trains :
+	<INPUT type="text" name="distance_securite" value="200"  id="distance_securite"> <BR>
 	Temps d'arret :
-	<INPUT type="text" name="tps_arret" value="" id="tps_arret"> <BR>
+	<INPUT type="text" name="tps_arret" value="30" id="arret"> <BR>
 	Temps de simulation :
-	<INPUT type="text" name="tps_simulation" value=""  id="tps_simulation"><br>
-	
-
-<div id="block_modele1" hidden>
-<form NAME="formulaire_vitesse1">	
-	Vitesse moyenne :
-	<INPUT TYPE="text" NAME="vitesse" VALUE="" id="vitesse_moy"> 
-<BR>
-	</form>
-</div>
-
-<div id="block_modele2" hidden>
-<form NAME="formulaire_vitesse2">	
+	<INPUT type="text" name="tps_simulation" value="100"  id="tps_simulation"> <BR>
 	Vitesse maximale :
-	<INPUT TYPE="text" NAME="vitesse" VALUE="" id="vitesse_max"> 
-<BR>
-	</form>
+	<INPUT TYPE="text" NAME="vitesse2" VALUE="20" id="vitesse_max"> <BR>
+	Vitesse moyenne :
+	<INPUT TYPE="text" NAME="vitesse1" VALUE="10" id="vitesse_moy"> <BR>
 </form>
-</div>
-<p><button onclick="simulation()">Cliquez ici pour telecharger</button> </p>
+<br>
+<br>
+<br>
+<br>
+<p class="but"><button onclick="simulation()">Cliquez ici pour telecharger</button> </p>
+<br>
+<p align="center"><img src="Metro-ligne-1.png"></p>
 </BODY>
 </HTML>
