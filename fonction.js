@@ -1,24 +1,3 @@
-function frequence(t,s,nb_segment) {
-    var max = t[0] + s[0];
-    for (var i=1; i<t.lenght; i++){
-        if (t[i] + s[i] > max) {
-            max = t[i] + s[i];
-        }
-    }
-    var a = 0;
-    var b = 0;
-    for (var i=1; i<t.lenght; i++){
-        a += t[i];
-        b -= s[i];
-    }
-    a = a/max;
-    b = nb_segment-b/max;
-    var Point = [[0,0],[a,1/max],[b,1/max],[nb_segment,0]];
-    return Point;
-}
-
-
-
 function graph(mat, Vmoy, dist, nro_train, nbr_segment) {
     var d = new Array(nbr_segment + 1);
     var t = new Array(nbr_segment + 1);
@@ -53,9 +32,12 @@ function graph(mat, Vmoy, dist, nro_train, nbr_segment) {
     while(compteur<nbr_segment-1) {
         graphe.lineTo(t[compteur+1],zone_dessin.height-d[compteur+1]);
         compteur=compteur+1;
-    }					
+    }			
+   		
     graphe.stroke();
-
+}
+    var zone_dessin = document.getElementById("schema");
+    var graphe= zone_dessin.getContext("2d");
     graphe.beginPath();
     graphe.lineWidth="1";
     graphe.strokeStyle="black";
@@ -65,5 +47,6 @@ function graph(mat, Vmoy, dist, nro_train, nbr_segment) {
     graphe.moveTo(0,zone_dessin.height);
     graphe.lineTo(0,0);
     graphe.moveTo(0,0);
+    graphe.fillText("distance",40,40);
+    graphe.fillText("temps",zone_dessin.width-40,zone_dessin.height-40);
     graphe.stroke();
-}
