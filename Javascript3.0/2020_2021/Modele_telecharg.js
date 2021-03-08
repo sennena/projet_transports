@@ -422,10 +422,6 @@ function modele(Nb_max_rames, Tps_sim, Distance_securite, w, Distances_interstat
 	}
 
 
-
-
-
-
 	var RESULTAT= new Array();
 	RESULTAT.push(Nb_quais);
 	RESULTAT.push(Nb_blocs);
@@ -721,37 +717,56 @@ function erase(graphex,longeur,hauteur){
 
 // ======================================================================================================
 
-function recup_ligne(i,matrice){
-	var R=new Array();
-	for (var j=0; j<matrice.get_co();j++){
-		R.push(matrice.get(i,j));
-	}
-	return R;
-}
+function dessin_ligne(graphex,i,mat,L,p0,color,hauteur,largeur,param){
+	var distance=0;
+	
+	var nbr_segment=148;
+	var d = new Array(nbr_segment + 1);
+    var t = new Array(nbr_segment + 1);
 
-function dessin_ligne(i,mat,L,p0){
-	var ligne=recup_ligne(i,mat);
-	var distance=L[0];
-	var p1=crea_point(0,0);
+    d[0] = 0;
+    for (var k=1; k<nbr_segment/2+1; k++) {
+        d[2*k-1] = d[2*k-2] + L[k-1];
+        d[2*k] = d[2*k-1];
+    }
+    
+    for (var k=0; k<nbr_segment/2; k++) {
+        t[2*k] = mat.get(i,k);
+        t[2*k+1] = t[2*k] + L[k]/Vitesse_moy;
+    }
+    t[nbr_segment] = t[nbr_segment-1];
+    
+    for (var k=0; k<nbr_segment+1; k++) {
+        d[k] = d[k]/d[nbr_segment]*hauteur;
+        if (param==0){
+        	t[k]=t[k]/t[nbr_segment]*largeur;
+        	param=t[nbr_segment];
+        }
+        else t[k]=t[k]/param*largeur;
+    }
+
+    var p1=crea_point(t[0],d[0]);
 	var p2=crea_point(0,0);
-	for (var j=1; j<L.length;j++){
-		p2=crea_point(Math.floor(ligne[j]/10),Math.floor(distance/10));
-		segment(p1,p2,p0,"red","8");
+	for(var j=0;j<t.length;j++){
+		p2=crea_point(Math.floor(t[j]),Math.floor(d[j]));
+		segment(graphex,p1,p2,p0,color,"2");
 		p1=p2;
 		distance+=L[j];
 	}
+	return param;
 }
 
 
+
+var couleur=["pink","cyan","red","green","blue","yellow","black","orange","purple","brown"];
 var zone_dessin = document.getElementById("schema");
 var graphe= zone_dessin.getContext("2d");
 var p0=crea_point(30,zone_dessin.height-30);
 erase(graphe,zone_dessin.width,zone_dessin.height);
 dessine_axes(graphe,p0,zone_dessin.height-60,zone_dessin.width-60,"temps","distance");
-//dessin_ligne(1,liste_lignes_pleines,L_block,p0);
-var p1=crea_point(0,0);
-const x=liste_lignes_pleines.get(1,1);
-var p2=crea_point(50,x);
-segment(graphe,p1,p2,p0,"red","3");
+var param=0;
+for(var i=0; i<Matrice_trains_temporel.get_li(); i++){
+	param=dessin_ligne(graphe,i,Matrice_trains_temporel,L_block,p0,couleur[i],zone_dessin.height-60,zone_dessin.width-60,param);
+}
 }
 
