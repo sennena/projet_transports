@@ -724,6 +724,41 @@ function erase(graphex,longeur,hauteur,x=0,y=0){
 	graphex.fillStyle="white";
 	graphex.fillRect(x,y,longeur,hauteur);
 }
+	
+function fill_legende(graphex,p0,num,max,taille){
+	var i=0;
+	var i2=i;
+	var fact=1;
+	while(9*fact<max){
+		fact*=10;
+	}
+	if (num==0){
+		while(i<max){
+			var p1=crea_point(-5,taille/max*i);
+			var p2=crea_point(5,taille/max*i);
+			segment(graphex,p1,p2,p0,"black","2");
+			i2=i.toString();
+			graphex.fillText(i2,Math.floor(i/1000)+10+p0[0],-p1[1]+p0[1]);
+			if (i!=0){
+				i=i+fact;
+			}
+			else i=fact;
+		}
+	}
+	if(num==1){
+		while(i<max){
+			var p1=crea_point(taille/max*i,-5);
+			var p2=crea_point(taille/max*i,5);
+			segment(graphex,p1,p2,p0,"black","2");
+			i2=i.toString();
+			graphex.fillText(i2,p1[0]+p0[0]-10,p1[1]+p0[1]+25);
+			if (i!=0){
+				i=i+fact;
+			}
+			else i=fact;
+		}
+	}
+}
 
 // ======================================================================================================
 
@@ -739,6 +774,9 @@ function dessin_ligne(graphex,i,mat,L,p0,color,hauteur,largeur,param){
         d[2*k-1] = d[2*k-2] + L[k-1];
         d[2*k] = d[2*k-1];
     }
+    if (param==0){
+	fill_legende(graphex,p0,0,d[nbr_segment],hauteur);
+    }
     
     for (var k=0; k<nbr_segment/2; k++) {
         t[2*k] = mat.get(i,k);
@@ -751,6 +789,7 @@ function dessin_ligne(graphex,i,mat,L,p0,color,hauteur,largeur,param){
         if (param==0){
         	t[k]=t[k]/t[nbr_segment]*largeur;
         	param=t[nbr_segment];
+		fill_legende(graphex,p0,1,param,largeur);
         }
         else t[k]=t[k]/param*largeur;
     }
