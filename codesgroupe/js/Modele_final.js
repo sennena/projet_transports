@@ -673,8 +673,8 @@ function simulation(telecharg){
     
     if(telecharg==true){
         download('Resultats_stations',traitement(Nb_max_rames,Tps_simul,Distance_securite,w,Distances_interstations,Vitesse_max,Vitesse_moy,Num_modele,nb_quais,nb_blocks,tot_block,tps_boucle,matrice_h,liste_lignes_pleines));
-        download('Resultats_trains',traitement(Nb_max_rames,Tps_simul,Distance_securite,w,Distances_interstations,Vitesse_max,Vitesse_moy,Num_modele,nb_quais,nb_blocks,tot_block,tps_boucle,train_h,liste_lignes_pleines));
-        download('Resultats_trains_temporel',traitement(Nb_max_rames,Tps_simul,Distance_securite,w,Distances_interstations,Vitesse_max,Vitesse_moy,Num_modele,nb_quais,nb_blocks,tot_block,tps_boucle,Matrice_trains_temporel,liste_lignes_pleines));
+        //download('Resultats_trains',traitement(Nb_max_rames,Tps_simul,Distance_securite,w,Distances_interstations,Vitesse_max,Vitesse_moy,Num_modele,nb_quais,nb_blocks,tot_block,tps_boucle,train_h,liste_lignes_pleines));
+        //download('Resultats_trains_temporel',traitement(Nb_max_rames,Tps_simul,Distance_securite,w,Distances_interstations,Vitesse_max,Vitesse_moy,Num_modele,nb_quais,nb_blocks,tot_block,tps_boucle,Matrice_trains_temporel,liste_lignes_pleines));
         download('horaires_simples',traitement_horaire(result2,stations));
         download('train_simples',traitement_horaire(result3,stations));
     }
