@@ -10,3 +10,5 @@ Pour visualiser notre travail vous devez :
       - extraire les documents du zip
       - lancer le fichier "Site_Web"
       - remplir le formulaire et amusez-vous !
+
+Navigateur Recommandé : Google Chrome
