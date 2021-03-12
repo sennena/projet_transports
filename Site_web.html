@@ -167,33 +167,29 @@
                         <input type="number" name="tps_arret" value="30" id="arret" min="0">
                         <BR>
                     </div>
-                    <br>
-                    <div class="champi">
-                    <p><button onclick="simulation(true)">Lancer la simulation <br>avec téléchargement</button></p>
-                    </div>
-                </div>
-                <div>
-
-                    <div class="champ">
-                        <label for="tps_simulation">Temps de simulation :</label>
-                        <input type="number" name="tps_simulation" value="100" id="tps_simulation" min="0">
-                        <BR>
-                    </div>
-
-                    <div class="champ">
-                        <label for="vitesse2">Vitesse maximale :</label>
-                        <input type="number" name="vitesse2" value="20" id="vitesse_max" min="0">
-                        <BR>
-                    </div>
-
                     <div class="champ">
                         <label for="vitesse1">Vitesse moyenne :</label>
                         <input type="number" name="vitesse1" value="10" id="vitesse_moy" min="0">
                         <BR>
                     </div>
-                    <br><br>
+                    <div class="champ">
+                        <label for="vitesse2">Vitesse maximale :</label>
+                        <input type="number" name="vitesse2" value="20" id="vitesse_max" min="0">
+                        <BR>
+                    </div>
+                    <div class="champ">
+                        <label for="tps_simulation">Temps de simulation :</label>
+                        <input type="number" name="tps_simulation" value="100" id="tps_simulation" min="0">
+                        <BR>
+                    </div>
+                    
+                </div>
+                <div>
+                    <br>
                     <div class="champi">
-                    <p><button onclick="simulation(false)">Lancer la simulation <br>sans téléchargement</button></p>
+                    <p><button onclick="simulation(false)">Lancer la simulation sans téléchargement</button></p>
+                    <br>
+                    <p><button onclick="simulation(true)">Lancer la simulation avec téléchargement</button></p>
                     </div>
                 </div>
             </div>
