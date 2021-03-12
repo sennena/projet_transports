@@ -9,4 +9,4 @@ Pour visualiser notre travail vous devez :
       - télécharger le github (appuyez sur le boutton "Code" puis sur "Download ZIP")
       - extraire les documents du zip
       - lancez le fichier "Site_Web"
-      - remplissez le formulaire et amusez vous.
+      - remplissez le formulaire et amusez vous !
