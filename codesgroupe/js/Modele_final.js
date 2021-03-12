@@ -874,7 +874,7 @@ function simulation(telecharg){
     
     function graph_temporel(graphex,mat,L,p0,col,hauteur_canvas,longeur_canvas,n){
         var param=0;
-        for(var i=0; i<mat.get_li(); i++){
+        for(var i=0; i<Math.min(10,mat.get_li()); i++){
             param=dessin_ligne(graphex,i,mat,L,p0,col[i],hauteur_canvas-60,longeur_canvas-60,param,n);
         }
         erase(graphex,40,hauteur_canvas-60,longeur_canvas-40);
