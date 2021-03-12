@@ -783,10 +783,10 @@ function simulation(telecharg){
     
     // ======================================================================================================
     
-    function dessin_ligne(graphex,i,mat,L,p0,color,hauteur,largeur,param){
+    function dessin_ligne(graphex,i,mat,L,p0,color,hauteur,largeur,param,n){
         var distance=0;
         
-        var nbr_segment=148;
+        var nbr_segment=n;
         var d = new Array(nbr_segment + 1);
         var t = new Array(nbr_segment + 1);
     
@@ -872,10 +872,10 @@ function simulation(telecharg){
         segment(graphex,p3,p4,p0,"red","2");
     }
     
-    function graph_temporel(graphex,mat,L,p0,col,hauteur_canvas,longeur_canvas){
+    function graph_temporel(graphex,mat,L,p0,col,hauteur_canvas,longeur_canvas,n){
         var param=0;
         for(var i=0; i<mat.get_li(); i++){
-            param=dessin_ligne(graphex,i,mat,L,p0,col[i],hauteur_canvas-60,longeur_canvas-60,param);
+            param=dessin_ligne(graphex,i,mat,L,p0,col[i],hauteur_canvas-60,longeur_canvas-60,param,n);
         }
         erase(graphex,40,hauteur_canvas-60,longeur_canvas-40);
     }
@@ -1078,7 +1078,7 @@ function simulation(telecharg){
     var p0=crea_point(30,zone_dessin.height-30);
     erase(graphe,zone_dessin.width,zone_dessin.height);
     dessine_axes(graphe,p0,zone_dessin.height-60,zone_dessin.width-60,"temps (s)","distance (mètres)");
-    graph_temporel(graphe,Matrice_trains_temporel,L_block,p0,couleur,zone_dessin.height,zone_dessin.width);
+    graph_temporel(graphe,Matrice_trains_temporel,L_block,p0,couleur,zone_dessin.height,zone_dessin.width,tot_block);
     
     var zone_dessin_2 = document.getElementById("schema2");
     var graphe_2= zone_dessin_2.getContext("2d");
