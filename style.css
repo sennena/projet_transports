@@ -73,6 +73,13 @@ form {
     /* margin: 2px; */
 }
 
+.champi {
+    margin-left: 30% ;
+    display: flex;
+    flex-direction: column;
+    justify-content: right;
+}
+
 form h2 {
     text-align: center;
     text-transform: uppercase;
