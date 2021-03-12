@@ -140,8 +140,12 @@
     </div>
 
     <div class="baspage">
-        <form action="">
+        <div class="bout">
+        <div class="bloc1">
             <h2>Paramètres</h2>
+        </div>
+        <div class="bloc2">
+        <form action="">
             <div class="params">
                 <div>
                     <div class="champ">
@@ -167,33 +171,37 @@
                         <input type="number" name="tps_arret" value="30" id="arret" min="0">
                         <BR>
                     </div>
-                    <div class="champ">
-                        <label for="vitesse1">Vitesse moyenne :</label>
-                        <input type="number" name="vitesse1" value="10" id="vitesse_moy" min="0">
-                        <BR>
-                    </div>
-                    <div class="champ">
-                        <label for="vitesse2">Vitesse maximale :</label>
-                        <input type="number" name="vitesse2" value="20" id="vitesse_max" min="0">
-                        <BR>
-                    </div>
+
                     <div class="champ">
                         <label for="tps_simulation">Temps de simulation :</label>
                         <input type="number" name="tps_simulation" value="100" id="tps_simulation" min="0">
                         <BR>
                     </div>
-                    
-                </div>
-                <div>
-                    <br>
-                    <div class="champi">
-                    <p><button onclick="simulation(false)">Lancer la simulation sans téléchargement</button></p>
-                    <br>
-                    <p><button onclick="simulation(true)">Lancer la simulation avec téléchargement</button></p>
+
+                    <div class="champ">
+                        <label for="vitesse2">Vitesse maximale :</label>
+                        <input type="number" name="vitesse2" value="20" id="vitesse_max" min="0">
+                        <BR>
+                    </div>
+
+                    <div class="champ">
+                        <label for="vitesse1">Vitesse moyenne :</label>
+                        <input type="number" name="vitesse1" value="10" id="vitesse_moy" min="0">
+                        <BR>
                     </div>
                 </div>
             </div>
         </form>
+        <div class="form">
+            <br>
+            <p><button onclick="simulation(true)">Lancer la simulation <br> avec téléchargement</button></p>
+            <br>
+            <p><button onclick="simulation(false)">Lancer la simulation <br> sans téléchargement</button></p>
+        </div>
+    </div>
+    </div>
+        
+        
 
         <footer>
                 Bonjour, <p> Nous sommes un groupe de 6 étudiants de l'école Ponts ParisTech. Nous vous présentons sur cette page notre projet de développement modélisant le traffic de la ligne de métro parisienne 1. Nous avons utilisé un modèle
@@ -217,16 +225,17 @@
                         A renommer le fichier nom plus parlant qui indique les grandes thematiques du fichier 
                         par exemple "traffic_metro.js"
                     -->
-                    <script type="text/javascript" src="js/fonctiongauche.js"></script>
+                    
                 </p>
             </div>
             <div class="s2">
                 <canvas id="schema2" height="400px" width="500%" style="border: 1px solid"> 
                 </canvas>
-                <script type="text/javascript" src="js/fonction3.js"></script>
+                
             </div>
         </div>
     </div>
+    
     <br>
     <br>
         <div class="bandeau">
