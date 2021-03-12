@@ -1,0 +1,27 @@
+@Margot
+    A completer/fusionner les autres fichiers Javascripts JS pour les ajouter dans le sous dossier JS "/js"
+    A supprimer les images inutiles dans le dossier "/img"
+
+
+
+
+    !!! Un exemple de tableau  zavec des propriétés pour fusionner les tableaux ( transmettre le principe à tes autres personnes de l'équipe) 
+    !!! F12 dans le navigateur Chrome/Firefox et copier/coller pour voir dans la Console comment on balaye un Array en JS.
+    
+
+    var stations = [
+        
+        { 'nom': 'La défense', 'corres':false,  'distance': 0},
+        { 'nom': 'Esplanade de La Défense', 'corres':true,  'distance': 1.2},
+        { 'nom': 'Hotel de ville', 'corres':true,  'distance': 8.9},
+        { 'nom': 'Vincenne', 'corres':false,  'distance': 23}
+    ];
+
+    stations.forEach(function(element, index, array) {
+        console.log(element);
+        console.log(element.nom);
+        console.log(element.corres);
+        console.log(element.distance);
+        console.log(index);
+    });
+    

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="css/style.css">
+
+
+    <title>Ligne 1</title>
+    <!-- Loading the FabricJS library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/3.6.2/fabric.min.js"></script>
+
+    <script type="text/javascript" src="js/Modele_final.js"></script>
+
+
+</head>
+
+<body>
+    <header>
+        <img src="img/logo_ratp_clean.png" alt="Logo ligne 1">
+    </header>
+
+    <div class="animation">
+        <canvas id="myCanvas" width="1700" height="195">
+            Your browser does not support the HTML canvas tag.</canvas>
+
+        <script>
+            var c = document.getElementById("myCanvas"); 
+            var ctx = c.getContext("2d"); 
+            var Troncons = [200, 210, 210, 210, 210, 210, 233, 233, 233, 235, 235, 235, 235, 207, 207, 207, 207, 226, 226, 226, 205, 205, 230, 230, 213, 213, 213, 215, 215, 233, 233, 233, 295, 295, 225, 225, 210, 210, 270, 270, 350, 218, 218, 218, 243, 243, 243, 215, 215, 215, 215, 247, 247, 247, 247, 223, 223, 223, 222, 222, 222, 222, 200, 200, 200, 200, 263, 263, 263, 210, 210, 210, 210, 200, 200, 210, 210, 210, 210, 263, 263, 263, 200, 200, 200, 200, 222, 222, 222, 222, 223, 223, 223, 247, 247, 247, 247, 215, 215, 215, 215, 243, 243, 243, 218, 218, 218, 350, 270, 270, 210, 210, 225, 225, 295, 295, 233, 233, 233, 215, 215, 213, 213, 213, 230, 230, 205, 205, 226, 226, 226, 207, 207, 207, 207, 235, 235, 235, 235, 233, 233, 233, 210, 210, 210, 210, 210, 200];
+            var Station = [-1, 0, -1, -1, -1, -1, 1, -1, -1, 2, -1, -1, -1, 3, -1, -1, -1, 4, -1, -1, 5, -1, 6, -1, 7, -1, -1, 8, -1, 9, -1, -1, 10, -1, 11, -1, 12, -1, 13, -1, 14, 15, -1, -1, 16, -1, -1, 17, -1, -1, -1, 18, -1, -1, -1, 19, -1, -1, 20, -1, -1, -1, 21, -1, -1, -1, 22, -1, -1, 23, -1, -1, -1, 24];
+            var Nom_stations = ["La Défense", "Esplanade de La Défense", "Pont de Neuilly", "Les Sablons", "Porte Maillot", "Argentine", "Charles de Gaulle - Étoile", "George V", "Franklin D. Roosevelt", "Champs-Élysées - Clemenceau", "Concorde", "Tuileries", "Palais Royal - Musée du Louvre", "Louvre - Rivoli", "Châtelet", "Hôtel de Ville", "Saint-Paul", "Bastille", "Gare de Lyon", "Reuilly - Diderot", "Nation", "Porte de Vincennes", "Saint-Mandé", "Bérault", "Château de Vincennes"];
+            var avec_corres = [true, false, false, false, true, false, true, false, true, true, true, false, true, false, true, true, false, true, true, true, true, true, false, false, false];
+
+            // Dessin de la ligne
+            function dessine_Ligne_1() {
+                var l;
+                var c;
+                l = 0;
+                for (var i=0; i<74; i++) {
+                    c = Troncons[i];
+                    ctx.fillStyle = "#FFFF00";
+                    ctx.fillRect(l, 140, c/10, 10);
+                    ctx.fillRect(l, 165, c/10, 10);
+        
+                    if (Station[i] != -1) {
+                        // Dessin des stations
+                        ctx.beginPath();
+                        ctx.arc(l, 145, 10, 0, 2*Math.PI);
+                        ctx.fillStyle = '#FFFF00';
+                        ctx.fill();
+        
+                        ctx.beginPath();
+                        ctx.arc(l, 170, 10, 0, 2*Math.PI);
+                        ctx.fillStyle = '#FFFF00';
+                        ctx.fill();
+
+                        // Dessin des stations avec correspondance
+                        if(avec_corres[Station[i]]) {
+                            ctx.beginPath();
+                            ctx.arc(l, 145, 10, 0, 2 * Math.PI);
+                            ctx.fillStyle = '#000000';
+                            ctx.fill();
+                            ctx.beginPath();
+                            ctx.arc(l, 145, 7, 0, 2 * Math.PI);
+                            ctx.fillStyle = '#FFFFFF';
+                            ctx.fill();
+
+                            ctx.beginPath();
+                            ctx.arc(l, 170, 10, 0, 2 * Math.PI);
+                            ctx.fillStyle = '#000000';
+                            ctx.fill();
+                            ctx.beginPath();
+                            ctx.arc(l, 170, 7, 0, 2 * Math.PI);
+                            ctx.fillStyle = '#FFFFFF';
+                            ctx.fill();
+                        }
+
+                        // Ecriture du nom des stations
+                        ctx.fillStyle = '#060080';
+                        ctx.font = "bold 10px Arial";
+
+                        var pos_y = 120;
+                        var rot = -0.7;
+                        ctx.save();
+                        ctx.translate(l, pos_y);
+                        ctx.rotate(rot);
+                        ctx.translate(-l, -pos_y);
+                        ctx.fillText(Nom_stations[Station[i]], l, pos_y);
+                        ctx.restore();
+                    }
+
+                    l+= c/10;
+                }
+            }
+
+            dessine_Ligne_1();
+        </script>
+    </div>
+
+    <div class="baspage">
+        <div class="bout">
+        <div class="bloc1">
+            <h2>Paramètres</h2>
+        </div>
+        <div class="bloc2">
+        <form action="">
+            <div class="params">
+                <div>
+                    <div class="champ">
+                        <label for="modele">Choix du modèle :</label>
+                        <input type="number" name="modele" value="1" min="1" max="2" id="mod">
+                    </div>
+
+                    <div class="champ">
+                        <label for="nb_train">Nombre de trains :</label>
+                        <input type="number" name="nb_train" value="20" id="nb_train" min="1" max="147">
+                        <BR>
+                    </div>
+
+                    <div class="champ">
+                        <label for="distance_securite">Distance de sécurité  :</label>
+                        <!-- entre les trains -->
+                        <input type="number" name="distance_securite" value="200" id="distance_securite" min="90">
+                        <BR>
+                    </div>
+
+                    <div class="champ">
+                        <label for="tps_arret">Temps d'arret :</label>
+                        <input type="number" name="tps_arret" value="30" id="arret" min="0">
+                        <BR>
+                    </div>
+
+                    <div class="champ">
+                        <label for="tps_simulation">Temps de simulation :</label>
+                        <input type="number" name="tps_simulation" value="100" id="tps_simulation" min="0">
+                        <BR>
+                    </div>
+
+                    <div class="champ">
+                        <label for="vitesse2">Vitesse maximale :</label>
+                        <input type="number" name="vitesse2" value="20" id="vitesse_max" min="0">
+                        <BR>
+                    </div>
+
+                    <div class="champ">
+                        <label for="vitesse1">Vitesse moyenne :</label>
+                        <input type="number" name="vitesse1" value="10" id="vitesse_moy" min="0">
+                        <BR>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="form">
+            <br>
+            <p><button onclick="simulation(true)">Lancer la simulation <br> avec téléchargement</button></p>
+            <br>
+            <p><button onclick="simulation(false)">Lancer la simulation <br> sans téléchargement</button></p>
+        </div>
+    </div>
+    </div>
+        
+        
+
+        <footer>
+                Bonjour, <p> Nous sommes un groupe de 6 étudiants de l'école Ponts ParisTech. Nous vous présentons sur cette page notre projet de développement modélisant le traffic de la ligne de métro parisienne 1. Nous avons utilisé un modèle
+                proposé par notre encadrant N. Farhi. </p>
+                <p> Vous pourrez regarder ci-dessous deux graphiques: l'un représentant la fréquence de présence des trains sur les quais en fonction du nombre de trains, l'autre représentant la distance parcourue par les trains en fonction du temps. </p>
+                <p> Pour consulter le rapport de notre projet, cliquez <a href="#">ici</a>. </p>
+            <img src="img/ecole.png" alt="Logo des Ponts" width="70px" height="70px">
+        </footer>
+    </div>
+    <br>
+    <br>
+    <div class="schema">
+        <h2>Graphiques</h2>
+        <div class="deux_graphiques">
+            <div class="s1">
+                <canvas id="schema1" height="400px" width="500%" style="border: 1px solid">
+                </canvas>
+                <p>
+                    <br><br>
+                    <!-- 
+                        A renommer le fichier nom plus parlant qui indique les grandes thematiques du fichier 
+                        par exemple "traffic_metro.js"
+                    -->
+                    
+                </p>
+            </div>
+            <div class="s2">
+                <canvas id="schema2" height="400px" width="500%" style="border: 1px solid"> 
+                </canvas>
+                
+            </div>
+        </div>
+    </div>
+    
+    <br>
+    <br>
+        <div class="bandeau">
+            Références : image de fond, http://visitefrance.ru/wp-content/uploads/2016/02/%D1%81%D1%82%D0%B0%D0%BD%D1%86%D0%B8%D1%8F-%D1%81%D0%B8%D1%82%D1%8D.jpg
+        </div>
+    </div>
+</body>
+
+</html>
