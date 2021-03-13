@@ -8,7 +8,10 @@
 //Rq: La fonction simulation gère toute la modélisation (entrée, traitement, sortie, affichage). Elle est divisée en sous blocs 
 // dont les fonctions sont décrites ci-après.
 
-function simulation(telecharg){
+var Xtimer= new Array();
+Xtimer.push(0);
+
+function simulation(telecharg,xtimer){
 
     //================================================================================================================================
     //================================================================================================================================
@@ -889,7 +892,7 @@ function simulation(telecharg){
     
     // ANIMATION GRAPHIQUE
 
-    function animation_graphique(Matrice,ctx) {
+    function animation_graphique(Matrice,ctx,x) {
         var Troncons = [200, 210, 210, 210, 210, 210, 233, 233, 233, 235, 235, 235, 235, 207, 207, 207, 207, 226, 226, 226, 205, 205, 230, 230, 213, 213, 213, 215, 215, 233, 233, 233, 295, 295, 225, 225, 210, 210, 270, 270, 350, 218, 218, 218, 243, 243, 243, 215, 215, 215, 215, 247, 247, 247, 247, 223, 223, 223, 222, 222, 222, 222, 200, 200, 200, 200, 263, 263, 263, 210, 210, 210, 210, 200, 200, 210, 210, 210, 210, 263, 263, 263, 200, 200, 200, 200, 222, 222, 222, 222, 223, 223, 223, 247, 247, 247, 247, 215, 215, 215, 215, 243, 243, 243, 218, 218, 218, 350, 270, 270, 210, 210, 225, 225, 295, 295, 233, 233, 233, 215, 215, 213, 213, 213, 230, 230, 205, 205, 226, 226, 226, 207, 207, 207, 207, 235, 235, 235, 235, 233, 233, 233, 210, 210, 210, 210, 210, 200];
         var Station = [-1, 0, -1, -1, -1, -1, 1, -1, -1, 2, -1, -1, -1, 3, -1, -1, -1, 4, -1, -1, 5, -1, 6, -1, 7, -1, -1, 8, -1, 9, -1, -1, 10, -1, 11, -1, 12, -1, 13, -1, 14, 15, -1, -1, 16, -1, -1, 17, -1, -1, -1, 18, -1, -1, -1, 19, -1, -1, 20, -1, -1, -1, 21, -1, -1, -1, 22, -1, -1, 23, -1, -1, -1, 24];
         var avec_corres = [true, false, false, false, true, false, true, false, true, true, true, false, true, false, true, true, false, true, true, true, true, true, false, false, false];
@@ -1061,8 +1064,9 @@ function simulation(telecharg){
             }
             t[0] += 1;
         }
+        clearInterval(x[0]);
     
-        setInterval(boucle, 25, temps);
+        x[0]=setInterval(boucle, 25, temps);
     }    
     
     //================================================================================================================================
@@ -1090,5 +1094,5 @@ function simulation(telecharg){
     
     var c = document.getElementById("myCanvas"); 
     var ctx = c.getContext("2d"); 
-    animation_graphique(Matrice_trains_temporel, ctx);
+    animation_graphique(Matrice_trains_temporel, ctx,xtimer);
     }
