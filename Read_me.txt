@@ -1,4 +1,4 @@
-
+========== projet_transports ==========
 
 Bonjour, Nous sommes un groupe de 6 étudiants de l'école des Ponts ParisTech. Nous vous présentons sur ce Github notre projet de département modélisant le trafic de la ligne 1 du métro parisien.
 
@@ -9,4 +9,4 @@ Pour visualiser notre travail vous devez :
   - lancer le fichier "Site_Web"
   - remplir le formulaire et amusez-vous !
 
-Navigateur recommandé : Google Chrome
+ /!\   Navigateur recommandé : Google Chrome    /!\
