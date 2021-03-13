@@ -10,3 +10,5 @@ Pour visualiser notre travail vous devez :
   - remplir le formulaire et amusez-vous !
 
  /!\   Navigateur recommandé : Google Chrome    /!\
+
+Note: Si le site classique (site_web.html) ne fonctionne pas correctement, il est recommandé d'utiliser le site de secours.
